@@ -1,0 +1,14 @@
+proje oluşturma kodu
+npx react-native init AwesomeProject
+
+
+npx react-native run-android
+npx react-native run-ios
+
+
+Navigation için paketler ( Tablı yapı )
+
+npm install @react-navigation/native
+npm install react-native-screens react-native-safe-area-context
+npm install @react-navigation/native-stack
+npm install @react-navigation/bottom-tabs
