@@ -7,6 +7,7 @@ import Artists from './screens/Artists';
 import Categories from './screens/Categories';
 import Profile from './screens/Profile';
 import News from './screens/News';
+import ArtistStackScreen from './navigation/ArtistStackScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +17,12 @@ function App() {
       <Tab.Navigator>
 
         <Tab.Screen name='Home' component={HomeScreen}></Tab.Screen>
-        <Tab.Screen name='Artists' component={Artists} ></Tab.Screen>
+
+
+        <Tab.Screen name='Artists' component={ArtistStackScreen} ></Tab.Screen>
+
+
+        
         <Tab.Screen name='Categories' component={Categories}></Tab.Screen>
         <Tab.Screen name='Profile' component={Profile}></Tab.Screen>
         <Tab.Screen name='News' component={News}></Tab.Screen>
