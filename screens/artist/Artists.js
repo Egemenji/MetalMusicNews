@@ -1,11 +1,12 @@
 import React from 'react'
 import { View, Text } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements'
-import { artists } from '../data/artistsData';
-
+import { artists } from '../../data/artistsData';
 
 
 const Artists = ({navigation}) => {
+
+  
     return (
         <>
             {

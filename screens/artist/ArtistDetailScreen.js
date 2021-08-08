@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
 
-import { artists } from '../data/artistsData';
+import { artists } from '../../data/artistsData';
 
 const ArtistDetailScreen = ({ navigation, route }) => {
 
