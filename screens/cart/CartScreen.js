@@ -23,8 +23,6 @@ const CartScreen = () => {
                             <ListItem.Subtitle>Count: {l.count}</ListItem.Subtitle>
                             <ListItem.Subtitle>Price: {l.price.toFixed(2)} TL</ListItem.Subtitle>
                             <ListItem.Subtitle>Total Price: {l.totalPrice.toFixed(2)} TL</ListItem.Subtitle>
-                          
-
                         </ListItem.Content>
 
                     </ListItem>
