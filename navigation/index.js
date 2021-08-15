@@ -8,6 +8,8 @@ import CartStackScreen from './CartStackScreen'
 import HomeStackScreen from './HomeStackScreen'
 import ProductsStackScreen from './ProductsStackScreen'
 import cartContext from '../store/cartContext';
+import ProfileScreen from '../screens/profile/ProfileScreen';
+import ProfileStackScreen from './ProfileStackScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -47,6 +49,13 @@ const MainNavigation = () => {
         }}></Tab.Screen>
 
         <Tab.Screen name='Products' component={ProductsStackScreen}></Tab.Screen>
+
+
+        <Tab.Screen name='Profile' component={ProfileStackScreen} options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="face-profile" color={color} size={26} />
+          )
+        }}></Tab.Screen>
 
 
       </Tab.Navigator>
