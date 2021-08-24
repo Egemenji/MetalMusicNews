@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { View, Text } from 'react-native'
+import { Alert } from 'react-native'
 import { ListItem, Avatar, Button } from 'react-native-elements'
 import { products } from '../../data/productsData';
 import cartContext from '../../store/cartContext';
@@ -7,9 +7,15 @@ import cartContext from '../../store/cartContext';
 
 const ProductListScreen = () => {
 
+
+
     const { cart, setCart } = useContext(cartContext);
 
     const addCart = (item) => {
+
+
+
+
 
         //eğer ürün sepette yoksa ekle  varsa ürün adedini değiştir
         let product = cart.find(q => q.id == item.id);
@@ -21,10 +27,10 @@ const ProductListScreen = () => {
         }
         else {
 
-            
+
             let newProduct = {
-                id:item.id,
-                name: item.name, 
+                id: item.id,
+                name: item.name,
                 count: 1,
                 totalPrice: item.price,
                 price: item.price
@@ -34,7 +40,14 @@ const ProductListScreen = () => {
 
         }
 
-     
+        Alert.alert(
+            "İşlem",
+            "Bu ürün başarıyla sepete eklendi.",
+            [
+                { text: "OK", onPress: () => console.log("OK Pressed") }
+            ]
+        );
+
 
     }
 
