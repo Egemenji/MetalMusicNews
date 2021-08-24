@@ -14,6 +14,8 @@ const ProfileScreen = () => {
     const signOut = () => {
         AsyncStorage.clear();
         setLoginView(true);
+
+        alert('Çıkış başarılı')
     }
 
     return (

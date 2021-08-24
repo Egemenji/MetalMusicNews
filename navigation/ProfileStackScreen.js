@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, { useContext, useState } from 'react'
 import { View, Text } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProductListScreen from '../screens/product/ProductListScreen'
@@ -11,14 +11,17 @@ const ProfileStack = createNativeStackNavigator();
 
 
 const ProfileStackScreen = () => {
+ 
+    const { loginView, setloginView } = useState(loginContext);
 
-    const {loginView, setloginView} = useContext(loginContext);
+   
 
-    AsyncStorage.getItem('loginStatus').then((data)=>{
-        if(data == 'true'){
+    AsyncStorage.getItem('loginStatus').then((data) => {
+
+        if (data == 'true') {         
             setloginView(false);
         }
-        else{
+        else {
             setloginView(true)
         }
     })
@@ -28,15 +31,15 @@ const ProfileStackScreen = () => {
             {
                 loginView == true ? (<ProfileStack.Screen name='Login' component={LoginScreen} options={{
                     headerShown: false,
-    
-                }}></ProfileStack.Screen>) : <></>
+
+                }}></ProfileStack.Screen>) : <ProfileStack.Screen name='Profile' component={ProfileScreen} options={{
+                    headerShown: false,
+
+                }}></ProfileStack.Screen>
             }
-            
 
-            <ProfileStack.Screen name='Profile' component={ProfileScreen} options={{
-                headerShown: false,
 
-            }}></ProfileStack.Screen>
+
         </ProfileStack.Navigator>
     )
 }
