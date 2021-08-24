@@ -3,23 +3,21 @@ import { useEffect } from 'react';
 import { FlatList, Image } from 'react-native';
 import { ScrollView } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements'
-// import { artists } from '../../data/artistsData';
+ import { artists } from '../../data/artistsData';
 
 
 
 
 const Artists = ({navigation}) => {
 
-    const [artists, setArtists] = useState([]);
+    const [artistList, setArtists] = useState([]);
 
 
     useEffect(() => {
         
-        fetch('http://localhost:1900/api/artists')
-        .then((res) => res.json())
-        .then((data) => {
-            setArtists(data);
-        })
+            console.log('ARTISTS', artists);
+            setArtists(artists);
+    
 
     }, [])
 
@@ -29,7 +27,7 @@ const Artists = ({navigation}) => {
     return (
         <ScrollView>
             {
-                artists.map((l, i) => (
+                artistList.map((l, i) => (
                     <ListItem key={i} bottomDivider  onPress={() => navigation.navigate('ArtistDetail',{id:l.id})}>
                         <Avatar source={{ uri: l.img }} />
                         <ListItem.Content>
