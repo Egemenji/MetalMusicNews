@@ -36,7 +36,7 @@ const MainNavigation = () => {
           component={ArtistStackScreen}
           options={{
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="search" color={color} size={26} />
+              <MaterialCommunityIcons name="microphone" color={color} size={26} />
             ),
           }}></Tab.Screen>
 
@@ -48,7 +48,11 @@ const MainNavigation = () => {
           tabBarBadge: cart.length
         }}></Tab.Screen>
 
-        <Tab.Screen name='Products' component={ProductsStackScreen}></Tab.Screen>
+        <Tab.Screen name='Products' component={ProductsStackScreen} options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="album" color={color} size={26} />
+          )
+        }}></Tab.Screen>
 
 
         <Tab.Screen name='Profile' component={ProfileStackScreen} options={{
