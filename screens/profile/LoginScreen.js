@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import { Text } from 'react-native-elements';
 import { Button } from 'react-native-elements/dist/buttons/Button';
 import { Input } from 'react-native-elements/dist/input/Input';
@@ -7,35 +7,69 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import loginContext from '../../store/loginContext';
 
 
-
-
-
-
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
 
    
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const {loginView, setLoginView} = useContext(loginContext);
+    const {setLoginView} = useContext(loginContext);
 
     const  loginControl = () => {
         //servisten kontrol ettik
-        if(email == 'Cagatay@mail.com' && password == '123'){
-            //kullanıcı adı şifre doğruysa store a login olduğunu söyleyeceğim
-           
-            AsyncStorage.setItem('loginStatus','true');
 
-            alert('Giriş başarılı');
+        let requestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email,password: password })
+        };
 
-            setLoginView(false);
+
+
+        fetch('http://localhost:1900/api/logincontrol', requestOptions)
+            .then((res) => {
+
+                if (res.status == 200) {
+                    return res.json()
+                }
+                else if (res.status == 422) {
+                    Alert.alert(
+                        "HATA",
+                        "Kullanıcı adı veya şifre hatalı",
+                        [
+                            { text: "OK", onPress: () => console.log("OK Pressed") }
+                        ]
+                    );
+
+                    throw new Error("Username or password exception!");
+                }
+
+            })
+            .then((data) => {
+
+                AsyncStorage.setItem('loginStatus',"1");
+                setLoginView(0);
+
+
+                Alert.alert(
+                    "Mesaj",
+                    "Giriş başarılı!",
+                    [
+                        { text: "OK", onPress: () => navigation.navigate('Profile') }
+                    ]
+                );
+
+            })
+            .catch((err) => {
+                console.log('ERROR', err);
+            })
 
         }
-        else{
-            alert('Kullanıcı adı veya şifre hatalı')
-        }
-    }
+
 
     return (
         <View>
@@ -45,6 +79,7 @@ const LoginScreen = () => {
                 placeholder='Email'
                 value={email}
                 onChangeText={(e) => setEmail(e)}
+                autoCapitalize='none'
             />
 
             <Input
@@ -55,9 +90,11 @@ const LoginScreen = () => {
             />
 
             <Button title='Login' style={{backgroundColor:'black'}} onPress={() => loginControl()}></Button>
+            <Button title='Register' style={{backgroundColor:'black'}} onPress={() => navigation.navigate('Register')}></Button>
 
         </View>
     )
 }
+
 
 export default LoginScreen

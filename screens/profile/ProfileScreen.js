@@ -7,15 +7,16 @@ import loginContext from '../../store/loginContext'
 
 
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}) => {
 
-    const {loginView, setLoginView} = useContext(loginContext);
+    const { setLoginView} = useContext(loginContext);
 
     const signOut = () => {
         AsyncStorage.clear();
-        setLoginView(true);
+        setLoginView(1);
 
-        alert('Çıkış başarılı')
+        alert('Çıkış başarılı');
+        
     }
 
     return (

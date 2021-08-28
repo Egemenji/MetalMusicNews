@@ -11,11 +11,11 @@ export const LoginProvider = ({children}) =>{
 
     AsyncStorage.getItem('loginStatus').then((data) => {
 
-        if (data == 'true') {         
-            setloginView(false);
+        if (data == 1) {         
+            setLoginView(0);
         }
         else {
-            setloginView(true)
+            setLoginView(1)
         }
     })
 
