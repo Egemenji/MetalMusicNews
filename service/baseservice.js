@@ -23,6 +23,7 @@ export const baseservice = {
 
     post: async (url, postData) => {
 
+     
         let result = {
             statusCode: null,
             data: null
@@ -36,6 +37,8 @@ export const baseservice = {
             },
             body: JSON.stringify(postData)
         };
+
+   
 
         await fetch(API_URL + url, requestOptions)
             .then((res) => {

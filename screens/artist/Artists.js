@@ -14,11 +14,7 @@ const Artists = ({navigation}) => {
 
 
     useEffect(() => {
-        
-            console.log('ARTISTS', artists);
             setArtists(artists);
-    
-
     }, [])
 
 

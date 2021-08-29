@@ -5,6 +5,9 @@ import ProfileScreen from '../screens/profile/ProfileScreen';
 import loginContext from '../store/loginContext';
 import RegisterScreen from '../screens/profile/RegisterScreen';
 import ChangePasswordScreen from '../screens/profile/ChangePasswordScreen';
+import ForgotPassword from '../screens/profile/ForgotPassword';
+import NewPasswordScreen from '../screens/profile/NewPasswordScreen';
+import ConfirmCodeScreen from '../screens/profile/ConfirmCodeScreen';
 
 const ProfileStack = createNativeStackNavigator();
 
@@ -19,20 +22,39 @@ const ProfileStackScreen = () => {
                 loginView != 0 ? (<ProfileStack.Screen name='Login' component={LoginScreen} options={{
                     headerShown: false,
 
-                }}></ProfileStack.Screen>) : <ProfileStack.Screen name='Profile' component={ProfileScreen} options={{
-                    headerShown: false,
+                }}></ProfileStack.Screen>) : (
+                    <>  
+                    <ProfileStack.Screen name='Profile' component={ProfileScreen} options={{
+                        headerShown: false,
 
-                }}></ProfileStack.Screen>
+                    }}></ProfileStack.Screen>
+
+                        <ProfileStack.Screen name='ChangePassword' component={ChangePasswordScreen} options={{
+                            headerShown: false,
+                        }}></ProfileStack.Screen>
+                    </>
+
+                )
             }
 
             <ProfileStack.Screen name='Register' component={RegisterScreen} options={{
                 headerShown: false,
             }}>
             </ProfileStack.Screen>
-
-            <ProfileStack.Screen name='ChangePassword' component={ChangePasswordScreen} options={{
+            <ProfileStack.Screen name='ForgotPassword' component={ForgotPassword} options={{
                 headerShown: false,
-            }}></ProfileStack.Screen>
+            }}>
+            </ProfileStack.Screen>
+            
+            <ProfileStack.Screen name='NewPassword' component={NewPasswordScreen} options={{
+                headerShown: false,
+            }}>
+            </ProfileStack.Screen>
+
+            <ProfileStack.Screen name='ConfirmCode' component={ConfirmCodeScreen} options={{
+                headerShown: false,
+            }}>
+            </ProfileStack.Screen>
 
 
 

@@ -34,7 +34,7 @@ const ProfileScreen = ({ navigation })=> {
         AsyncStorage.clear();
         setLoginView(1);
 
-        alert('Çıkış başarılı');
+        navigation.navigate('Home')
 
     }
 

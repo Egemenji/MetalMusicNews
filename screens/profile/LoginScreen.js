@@ -23,7 +23,7 @@ const LoginScreen = ({ navigation }) => {
         baseservice.post('/api/logincontrol', { email: email, password: password })
             .then((res) => {
 
-           
+
 
                 if (res.statusCode == 422) {
                     Alert.alert(
@@ -38,19 +38,12 @@ const LoginScreen = ({ navigation }) => {
                 }
                 else if (res.statusCode == 200) {
 
-            
+
                     AsyncStorage.setItem('loginStatus', "1");
                     AsyncStorage.setItem('userId', res.data.data._id)
                     setLoginView(0);
 
-
-                    Alert.alert(
-                        "Mesaj",
-                        "Giriş başarılı!",
-                        [
-                            { text: "OK", onPress: () => navigation.navigate('Profile') }
-                        ]
-                    );
+                    navigation.navigate('Profile')
                 }
                 else {
                     Alert.alert(
@@ -84,7 +77,11 @@ const LoginScreen = ({ navigation }) => {
             />
 
             <Button title='Login' style={{ backgroundColor: 'black' }} onPress={() => loginControl()}></Button>
-            <Button title='Register' style={{ backgroundColor: 'black' }} onPress={() => navigation.navigate('Register')}></Button>
+
+            <Text onPress={() => navigation.navigate('ForgotPassword')}>Forgot Password</Text>
+            <Text style={{ color: '#424B54' }} onPress={() => navigation.navigate('Register')}>Register</Text>
+
+
 
         </View>
     )
