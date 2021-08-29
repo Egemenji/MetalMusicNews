@@ -4,6 +4,7 @@ import LoginScreen from '../screens/profile/LoginScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import loginContext from '../store/loginContext';
 import RegisterScreen from '../screens/profile/RegisterScreen';
+import ChangePasswordScreen from '../screens/profile/ChangePasswordScreen';
 
 const ProfileStack = createNativeStackNavigator();
 
@@ -27,8 +28,11 @@ const ProfileStackScreen = () => {
             <ProfileStack.Screen name='Register' component={RegisterScreen} options={{
                 headerShown: false,
             }}>
-
             </ProfileStack.Screen>
+
+            <ProfileStack.Screen name='ChangePassword' component={ChangePasswordScreen} options={{
+                headerShown: false,
+            }}></ProfileStack.Screen>
 
 
 

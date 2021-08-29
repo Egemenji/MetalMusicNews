@@ -114,7 +114,7 @@ const RegisterScreen = ({ navigation }) => {
                         {
                             cities.map((item, key) => {
 
-                                return (<Picker.Item label={item.name} value={item.name} />)
+                                return (<Picker.Item label={item.name} key={key} value={item.name} />)
                             })
                         }
                     </Picker>

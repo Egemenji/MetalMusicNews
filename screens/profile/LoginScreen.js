@@ -22,6 +22,9 @@ const LoginScreen = ({ navigation }) => {
 
         baseservice.post('/api/logincontrol', { email: email, password: password })
             .then((res) => {
+
+           
+
                 if (res.statusCode == 422) {
                     Alert.alert(
                         "HATA",
@@ -34,7 +37,10 @@ const LoginScreen = ({ navigation }) => {
                     throw new Error("Username or password exception!");
                 }
                 else if (res.statusCode == 200) {
+
+            
                     AsyncStorage.setItem('loginStatus', "1");
+                    AsyncStorage.setItem('userId', res.data.data._id)
                     setLoginView(0);
 
 
@@ -46,7 +52,7 @@ const LoginScreen = ({ navigation }) => {
                         ]
                     );
                 }
-                else{
+                else {
                     Alert.alert(
                         "Hata",
                         "Sistemde hata meydana geldi!",
