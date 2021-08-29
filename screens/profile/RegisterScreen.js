@@ -1,10 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Formik } from 'formik'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { View, Alert, Button, Text } from 'react-native'
 import { Input } from 'react-native-elements/dist/input/Input'
 import * as yup from 'yup'
-import loginContext from '../../store/loginContext'
+import loginContext from '../../store/loginContext';
+import { Picker } from '@react-native-picker/picker';
+import { cities } from '../../data/cities'
+import { baseservice } from '../../service/baseservice'
+
 
 
 
@@ -21,7 +25,7 @@ const loginValidationSchema = yup.object().shape({
 const RegisterScreen = ({ navigation }) => {
 
     const { setLoginView } = useContext(loginContext);
-
+    const [selectedCity, setSelectedCity] = useState();
 
     return (
         <Formik
@@ -29,24 +33,9 @@ const RegisterScreen = ({ navigation }) => {
             initialValues={{ email: '', name: '', surname: '', password: '' }}
             onSubmit={(values) => {
 
-                let requestOptions = {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email: values.email, name: values.name, surname: values.surname, password: values.password })
-                };
-
-
-
-                fetch('http://localhost:1900/api/register', requestOptions)
+                baseservice.post('/api/register', { email: values.email, name: values.name, surname: values.surname, password: values.password, city: selectedCity })
                     .then((res) => {
-
-                        if (res.status == 200) {
-                            return res.json()
-                        }
-                        else if (res.status == 422) {
+                        if (res.statusCode == 422) {
                             Alert.alert(
                                 "HATA",
                                 "Bu email sisteme kayıtlı!",
@@ -57,25 +46,28 @@ const RegisterScreen = ({ navigation }) => {
 
                             throw new Error("EMail validation error!");
                         }
-
-                    })
-                    .then((data) => {
-
-                        AsyncStorage.setItem('loginStatus', "1");
-                        setLoginView(0);
+                        else if (res.statusCode == 200) {
+                            AsyncStorage.setItem('loginStatus', "1");
+                            setLoginView(0);
 
 
-                        Alert.alert(
-                            "Mesaj",
-                            "İşlem başarılı!",
-                            [
-                                { text: "OK", onPress: () => navigation.navigate('Profile') }
-                            ]
-                        );
-
-                    })
-                    .catch((err) => {
-                        console.log('ERROR', err);
+                            Alert.alert(
+                                "Mesaj",
+                                "İşlem başarılı!",
+                                [
+                                    { text: "OK", onPress: () => navigation.navigate('Profile') }
+                                ]
+                            );
+                        }
+                        else {
+                            Alert.alert(
+                                "Hata",
+                                "Sistemde hata meydana geldi!",
+                                [
+                                    { text: "OK", onPress: () => navigation.navigate('Profile') }
+                                ]
+                            );
+                        }
                     })
 
 
@@ -111,6 +103,22 @@ const RegisterScreen = ({ navigation }) => {
                         value={values.password}
                         secureTextEntry={true}
                     />
+
+                    <Picker
+
+                        selectedValue={selectedCity}
+                        onValueChange={(itemValue, itemIndex) =>
+                            setSelectedCity(itemValue)
+                        }>
+
+                        {
+                            cities.map((item, key) => {
+
+                                return (<Picker.Item label={item.name} value={item.name} />)
+                            })
+                        }
+                    </Picker>
+
                     {errors.email &&
                         <Text style={{ color: 'red' }}>{errors.email}</Text>
                     }

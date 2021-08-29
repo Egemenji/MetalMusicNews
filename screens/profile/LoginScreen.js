@@ -5,38 +5,24 @@ import { Button } from 'react-native-elements/dist/buttons/Button';
 import { Input } from 'react-native-elements/dist/input/Input';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import loginContext from '../../store/loginContext';
+import { baseservice } from '../../service/baseservice';
 
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({ navigation }) => {
 
-   
-    
+
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const {setLoginView} = useContext(loginContext);
+    const { setLoginView } = useContext(loginContext);
 
-    const  loginControl = () => {
-        //servisten kontrol ettik
-
-        let requestOptions = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: email,password: password })
-        };
+    const loginControl = () => {
 
 
-
-        fetch('http://localhost:1900/api/logincontrol', requestOptions)
+        baseservice.post('/api/logincontrol', { email: email, password: password })
             .then((res) => {
-
-                if (res.status == 200) {
-                    return res.json()
-                }
-                else if (res.status == 422) {
+                if (res.statusCode == 422) {
                     Alert.alert(
                         "HATA",
                         "Kullanıcı adı veya şifre hatalı",
@@ -47,34 +33,36 @@ const LoginScreen = ({navigation}) => {
 
                     throw new Error("Username or password exception!");
                 }
+                else if (res.statusCode == 200) {
+                    AsyncStorage.setItem('loginStatus', "1");
+                    setLoginView(0);
 
+
+                    Alert.alert(
+                        "Mesaj",
+                        "Giriş başarılı!",
+                        [
+                            { text: "OK", onPress: () => navigation.navigate('Profile') }
+                        ]
+                    );
+                }
+                else{
+                    Alert.alert(
+                        "Hata",
+                        "Sistemde hata meydana geldi!",
+                        [
+                            { text: "OK", onPress: () => navigation.navigate('Profile') }
+                        ]
+                    );
+                }
             })
-            .then((data) => {
-
-                AsyncStorage.setItem('loginStatus',"1");
-                setLoginView(0);
-
-
-                Alert.alert(
-                    "Mesaj",
-                    "Giriş başarılı!",
-                    [
-                        { text: "OK", onPress: () => navigation.navigate('Profile') }
-                    ]
-                );
-
-            })
-            .catch((err) => {
-                console.log('ERROR', err);
-            })
-
-        }
+    }
 
 
     return (
         <View>
 
-            <Text h2 style={{textAlign:'center'}}>Login Form</Text>
+            <Text h2 style={{ textAlign: 'center' }}>Login Form</Text>
             <Input
                 placeholder='Email'
                 value={email}
@@ -89,8 +77,8 @@ const LoginScreen = ({navigation}) => {
                 onChangeText={(e) => setPassword(e)}
             />
 
-            <Button title='Login' style={{backgroundColor:'black'}} onPress={() => loginControl()}></Button>
-            <Button title='Register' style={{backgroundColor:'black'}} onPress={() => navigation.navigate('Register')}></Button>
+            <Button title='Login' style={{ backgroundColor: 'black' }} onPress={() => loginControl()}></Button>
+            <Button title='Register' style={{ backgroundColor: 'black' }} onPress={() => navigation.navigate('Register')}></Button>
 
         </View>
     )
