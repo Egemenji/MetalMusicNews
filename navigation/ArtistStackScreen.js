@@ -14,10 +14,11 @@ const ArtistStackScreen = () => {
                 headerShown: false,
 
             }} ></ArtistStack.Screen>
-            <ArtistStack.Screen name='ArtistDetail' component={ArtistDetailScreen} options={{
-                headerShown: false,
 
-            }}></ArtistStack.Screen>
+            <ArtistStack.Screen name='ArtistDetail' component={ArtistDetailScreen} options={{ title : "", 
+                headerShown: true
+
+            }} ></ArtistStack.Screen>
         </ArtistStack.Navigator>
     )
 }

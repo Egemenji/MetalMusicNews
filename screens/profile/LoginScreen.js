@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Alert } from 'react-native';
+import { View, Alert, StyleSheet, TextInput } from 'react-native';
 import { Text } from 'react-native-elements';
 import { Button } from 'react-native-elements/dist/buttons/Button';
 import { Input } from 'react-native-elements/dist/input/Input';
@@ -61,31 +61,106 @@ const LoginScreen = ({ navigation }) => {
     return (
         <View>
 
-            <Text h2 style={{ textAlign: 'center' }}>Login Form</Text>
-            <Input
+            <Text style={textStyles.input}>Welcome,      good to see    you again</Text>
+
+
+            <TextInput
+
                 placeholder='Email'
                 value={email}
                 onChangeText={(e) => setEmail(e)}
                 autoCapitalize='none'
+                style={styles.input}
+
             />
 
-            <Input
+            <TextInput
                 placeholder='Password'
                 secureTextEntry={true}
                 value={password}
                 onChangeText={(e) => setPassword(e)}
+                style={styles.input}
+
             />
 
-            <Button title='Login' style={{ backgroundColor: 'black' }} onPress={() => loginControl()}></Button>
+            <Text onPress={() => navigation.navigate('ForgotPassword')} style={ForgotPasswordStyle.input}>FORGOT PASSWORD</Text>
 
-            <Text onPress={() => navigation.navigate('ForgotPassword')}>Forgot Password</Text>
-            <Text style={{ color: '#424B54' }} onPress={() => navigation.navigate('Register')}>Register</Text>
+            <Button title='LOGIN' style={{ backgroundColor: 'black', marginLeft: 70, marginRight: 70, marginBottom: 20, borderRadius: 10 }} onPress={() => loginControl()}></Button>
+
+
+            <View style={container.input}>
+
+
+            <Text style = {accountStyle.input}>Don't have an account?</Text>
+            <Text style={registerStyle.input} onPress={() => navigation.navigate('Register')}>REGISTER</Text>
+
+
+            </View>
 
 
 
         </View>
     )
 }
+const textStyles = StyleSheet.create({
+    input: {
+
+        marginTop: 50,
+        marginBottom: 10,
+        paddingLeft: 50,
+        paddingRight: 50,
+        paddingTop: 50,
+        fontSize: 40,
+
+    },
+});
+
+
+const styles = StyleSheet.create({
+    input: {
+        height: 50,
+        margin: 12,
+        borderWidth: 0.5,
+        padding: 10,
+        borderRadius: 10,
+    },
+});
+
+const ForgotPasswordStyle = StyleSheet.create({
+    input: {
+
+        marginTop: 10,
+        marginBottom: 20,
+        paddingLeft: 120,
+        fontSize: 15,
+        fontWeight : "bold"
+
+    },
+});
+
+const accountStyle = StyleSheet.create({
+    input: {
+        paddingLeft : 75 , 
+        fontWeight: "bold" , 
+        color : "#7F8282" , 
+    },
+});
+
+const registerStyle = StyleSheet.create({
+    input: {
+
+        marginBottom: 20,
+        paddingLeft: 10,
+        fontSize: 15,
+        fontWeight: "bold"
+    },
+});
+
+const container = StyleSheet.create({
+    input: {
+   flexDirection: "row"
+    },
+});
 
 
 export default LoginScreen

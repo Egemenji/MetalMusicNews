@@ -9,6 +9,8 @@ import ForgotPassword from '../screens/profile/ForgotPassword';
 import NewPasswordScreen from '../screens/profile/NewPasswordScreen';
 import ConfirmCodeScreen from '../screens/profile/ConfirmCodeScreen';
 
+
+
 const ProfileStack = createNativeStackNavigator();
 
 
@@ -24,25 +26,25 @@ const ProfileStackScreen = () => {
 
                 }}></ProfileStack.Screen>) : (
                     <>  
-                    <ProfileStack.Screen name='Profile' component={ProfileScreen} options={{
+                    <ProfileStack.Screen name='ProfileScreen' component={ProfileScreen} options={{ title : "",
                         headerShown: false,
 
                     }}></ProfileStack.Screen>
 
-                        <ProfileStack.Screen name='ChangePassword' component={ChangePasswordScreen} options={{
-                            headerShown: false,
+                        <ProfileStack.Screen name='ChangePassword' component={ChangePasswordScreen} options={{title: "",
+                            headerShown: true,
                         }}></ProfileStack.Screen>
                     </>
 
                 )
             }
 
-            <ProfileStack.Screen name='Register' component={RegisterScreen} options={{
-                headerShown: false,
+            <ProfileStack.Screen name='Register' component={RegisterScreen} options={{ title : "",
+                headerShown: true,
             }}>
             </ProfileStack.Screen>
-            <ProfileStack.Screen name='ForgotPassword' component={ForgotPassword} options={{
-                headerShown: false,
+            <ProfileStack.Screen name='ForgotPassword' component={ForgotPassword} options={{ title : "",
+                headerShown: true,
             }}>
             </ProfileStack.Screen>
             
@@ -61,5 +63,7 @@ const ProfileStackScreen = () => {
         </ProfileStack.Navigator>
     )
 }
+
+
 
 export default ProfileStackScreen

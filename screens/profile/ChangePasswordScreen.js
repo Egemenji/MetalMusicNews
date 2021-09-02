@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Formik } from 'formik';
 import React, { useContext } from 'react'
-import { View, Button, Alert } from 'react-native';
+import { View, Button, Alert, StyleSheet, TextInput } from 'react-native';
 import { Text } from 'react-native-elements';
 import { Input } from 'react-native-elements/dist/input/Input'
 import * as yup from 'yup';
@@ -86,27 +86,29 @@ const ChangePasswordScreen = ({navigation}) => {
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                     <View>
-                        <Input
+                        <TextInput
                             onChangeText={handleChange('oldPassword')}
                             onBlur={handleBlur('oldPassword')}
                             value={values.oldPassword}
                             secureTextEntry={true}
                             placeholder='Old password'
+                            style = {styles.input}
                         />
-                        <Input
+                        <TextInput
                             onChangeText={handleChange('newPassword')}
                             onBlur={handleBlur('newPassword')}
                             value={values.newPassword}
                             secureTextEntry={true}
                             placeholder='New password'
-
+                            style = {styles.input}
                         />
-                        <Input
+                        <TextInput
                             onChangeText={handleChange('confirmPassword')}
                             onBlur={handleBlur('confirmPassword')}
                             value={values.confirmPassword}
                             secureTextEntry={true}
                             placeholder='Confirm password'
+                            style = {styles.input}
                         />
 
                         {errors.oldPassword &&
@@ -119,13 +121,25 @@ const ChangePasswordScreen = ({navigation}) => {
                             <Text style={{ color: 'red' }}>{errors.confirmPassword}</Text>
                         }
 
-
-                        <Button onPress={handleSubmit} title="Submit" />
+                        <Button onPress={handleSubmit} color = "black" title="Submit" />
                     </View>
                 )}
             </Formik>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    input: {
+        height: 50,
+        marginTop: 30,
+        marginLeft: 20,
+        marginRight: 20,
+        marginBottom: 10,
+        borderWidth: 0.5,
+        padding: 10,
+        borderRadius: 10,
+    },
+});
 
 export default ChangePasswordScreen
