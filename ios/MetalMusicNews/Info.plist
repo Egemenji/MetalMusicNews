@@ -6,6 +6,12 @@
   <array>
     <string>MaterialCommunityIcons.ttf</string>
   </array>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>Metal uygulaması sizden galeri izni istiyor!</string>
+  <key>NSCameraUsageDescription</key>
+  <string>Metal uygulaması kameraya erişmek istiyor.</string>
+  <key>NSContactsUsageDescription</key>
+  <string>Metal uygulaması kişi listenize erişmek istiyor. bir düşün derim </string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

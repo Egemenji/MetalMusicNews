@@ -12,6 +12,10 @@ target 'MetalMusicNews' do
     :hermes_enabled => false
   )
 
+  # pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+  pod 'react-native-contacts', :path => '../node_modules/react-native-contacts' 
+  pod 'react-native-cameraroll', :path => '../node_modules/@react-native-community/cameraroll'
+
   target 'MetalMusicNewsTests' do
     inherit! :complete
     # Pods for testing
